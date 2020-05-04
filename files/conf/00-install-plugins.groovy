@@ -18,13 +18,35 @@ def needRestart = false;
 pm = Jenkins.instance.pluginManager
 pm.doCheckUpdatesServer()
 
-[   'locale',
-    'credentials',
-    'htmlpublisher',
-    'github-pullrequest',
+[   'ant',
+    'antisamy-markup-formatter',
+    'build-timeout',
+    'command-launcher',
+    'email-ext',
+    'github-branch-source',
+    'jaxb',
+    'jdk-tool',
+    'ldap',
+    'matrix-auth',
+    'pam-auth',
+    'pipeline-github-lib',
+    'pipeline-stage-view',
+    'ssh-slaves',
+    'timestamper',
+    'workflow-aggregator',
+    'ws-cleanup',
+//
+    'conditional-buildstep',
+    'discard-old-build',
     'greenballs',
-    'ant',
-//    'workflow-aggregator',
+    'hidden-parameter',
+    'locale',
+//    'mask-passwords',
+//    'maven-plugin',
+//    'htmlpublisher',
+    'parameterized-trigger',
+    'publish-over-ssh',
+//    'vsphere-cloud',
 ].each{ plugin ->
 pm = Jenkins.instance.updateCenter.getPlugin(plugin);
 println plugin;
