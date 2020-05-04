@@ -10,7 +10,7 @@ def hosts = [
 name,hostname,username,encryptedPassword,remoteRootDir,port,timeout,overrideKey,keyPath,key,disableExec
 ['Hostalias','hostname','user','encryptedPassword','remoteRootDir',22,30000,false,'','',true]
 */
-    ['node1','10.50.10.20','appuser','','',22,30000,true,'./secrets/appuser','',true]
+    ['node1','10.50.10.20','appuser','','',22,30000,true,'./secrets/appuser','',false]
 ]
 
 println '-- Renewing Global Publish-Over-SSH-Server Configs'
