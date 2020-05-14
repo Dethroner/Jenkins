@@ -6,7 +6,7 @@ import hudson.plugins.locale.PluginImpl
 println("--- Configuring URL")
 jlc = JenkinsLocationConfiguration.get()
 jlc.setUrl("http://10.50.10.10:8080/") 
-println(jlc.getUrl())
+println("    "+jlc.getUrl())
 jlc.save() 
 
 println("--- Configuring global getting")
@@ -50,5 +50,5 @@ if(!instance.getAgentProtocols().equals(agentProtocolsList)) {
     instance.save()
 }
 else {
-    println "Nothing changed.  Agent Protocols already configured: ${instance.getAgentProtocols()}"
+    println "    Nothing changed.  Agent Protocols already configured: ${instance.getAgentProtocols()}"
 }

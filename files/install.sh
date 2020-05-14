@@ -16,7 +16,7 @@ apt install --assume-yes postfix
 
 ### Install packages
 apt update && apt upgrade -y
-apt install -y apt-transport-https gnupg default-jre default-jdk
+apt install -y apt-transport-https gnupg default-jre default-jdk unzip
 
 ### Install Jenkins
 wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -

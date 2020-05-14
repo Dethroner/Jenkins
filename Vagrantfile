@@ -14,16 +14,15 @@ Vagrant.configure("2") do |config|
 		master.vm.hostname = "jenkins"
 		master.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 		master.vm.provision :shell, path: "./files/user.sh", args: "appuser"
-		master.vm.provision :shell, path: "./files/vm-route.sh", privileged: true
+		master.vm.provision :shell, privileged: true, path: "./files/vm-route.sh"
 		master.vm.provision :shell, path: "./files/install.sh"
 		master.vm.provision :shell, privileged: true, inline: <<-SHELL
 				mkdir -p /var/lib/jenkins/init.groovy.d
 				cp /vagrant/files/conf/* /var/lib/jenkins/init.groovy.d/
-				chown jenkins:jenkins /var/lib/jenkins/init.groovy.d/*
-				service jenkins force-reload
-				cp /home/appuser/.ssh/appuser /var/lib/jenkins/secrets/
-				chown jenkins:jenkins /var/lib/jenkins/secrets/appuser
+				chown jenkins:jenkins -R /var/lib/jenkins/init.groovy.d
+				service jenkins force-reload				
 		SHELL
+		master.vm.provision :shell, privileged: true, path: "./files/post-install.sh"
 	end
 
 	(1..J).each do |i|
@@ -38,10 +37,10 @@ Vagrant.configure("2") do |config|
 			slave.vm.hostname = "node#{i}"
 			slave.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 			slave.vm.provision :shell, path: "./files/user-slave.sh", args: "appuser"
-			slave.vm.provision :shell, path: "./files/vm-route.sh", privileged: true
-			slave.vm.provision :shell, path: "./files/java.sh", privileged: true
+			slave.vm.provision :shell, privileged: true, path: "./files/vm-route.sh"
+			slave.vm.provision :shell, privileged: true, path: "./files/java.sh"
 			slave.vm.provision :shell, inline: <<-SHELL
-				sudo apt update && sudo apt install -y npm gulp
+				sudo apt update && sudo apt install -y npm gulp unzip
 			SHELL
 		end
 	end
