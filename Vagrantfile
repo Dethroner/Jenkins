@@ -38,9 +38,9 @@ Vagrant.configure("2") do |config|
 			slave.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 			slave.vm.provision :shell, path: "./files/user-slave.sh", args: "appuser"
 			slave.vm.provision :shell, privileged: true, path: "./files/vm-route.sh"
-			slave.vm.provision :shell, privileged: true, path: "./files/java.sh"
+			slave.vm.provision :shell, privileged: true, path: "./files/utils.sh"
 			slave.vm.provision :shell, inline: <<-SHELL
-				sudo apt update && sudo apt install -y npm gulp unzip
+				sudo apt update && sudo apt install -y npm gulp
 			SHELL
 		end
 	end
